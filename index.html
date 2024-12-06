@@ -4,295 +4,423 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tappy Games - Innovative Mobile Game Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-purple: #A277FF;
-            --primary-green: #4ADE80;
-            --bg-dark: #1A1B26;
-            --bg-darker: #13141F;
-            --surface-color: rgba(255, 255, 255, 0.05);
-            --text-color: #e0e0e0;
-            --text-muted: #8F9BB3;
+            --primary: #6366F1;
+            --secondary: #10B981;
+            --accent: #F471B5;
+            --dark: #0F172A;
+            --darker: #020617;
+            --light: #F8FAFC;
+            --surface: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
-            background-attachment: fixed;
-            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--darker);
+            color: var(--light);
             line-height: 1.6;
-            min-height: 100vh;
         }
-        
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.075"/></svg>');
+            pointer-events: none;
+            z-index: 1;
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
-        
+
         header {
-            background: rgba(26, 27, 38, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: white;
-            padding: 1em 0;
             position: fixed;
             width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass);
         }
-        
-        nav ul {
-            list-style-type: none;
-            padding: 0;
+
+        nav {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
         }
-        
-        nav ul li a {
-            color: var(--text-color);
+
+        .logo {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
         }
-        
-        nav ul li a:hover {
-            color: var(--primary-purple);
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
-        
-        h1, h2, h3 {
-            color: var(--primary-purple);
-            font-weight: 600;
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
-        
+
         .hero {
-            background: linear-gradient(rgba(26, 27, 38, 0.8), rgba(19, 20, 31, 0.9)), url('/placeholder.svg?height=500&width=1000');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            padding-top: 80px;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 50%);
+            opacity: 0.1;
+            filter: blur(100px);
+        }
+
         .hero-content {
+            text-align: center;
             max-width: 800px;
-            margin: 0 auto;
         }
-        
+
         .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-green));
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 700;
         }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 12px 32px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-green));
-            color: white;
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--light);
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: var(--light);
             text-decoration: none;
-            font-weight: 500;
             border-radius: 8px;
+            font-weight: 500;
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
         }
-        
-        .cta-button:hover {
+
+        .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(162, 119, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
         }
-        
-        .games, .about, .team, .contact {
-            padding: 100px 0;
+
+        .games {
+            padding: 4rem 0;
         }
-        
-        .game-grid, .team-grid {
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
         }
-        
-        .game-card, .team-member {
-            background: var(--surface-color);
+
+        .game-card {
+            background: var(--surface);
             border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass);
+            transition: all 0.3s ease;
         }
-        
-        .game-card:hover, .team-member:hover {
-            transform: translateY(-5px);
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
-        
-        .game-card img, .team-member img {
+
+        .game-image {
+            position: relative;
+            padding-top: 216.74%;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .game-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
-        
-        .game-card-content, .team-member-content {
-            padding: 24px;
+
+        .game-card:hover .game-image img {
+            transform: scale(1.1);
         }
-        
-        .highlight {
-            color: var(--primary-green);
+
+        .game-content {
+            padding: 2rem;
         }
-        
+
+        .game-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .game-content p {
+            color: var(--light);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
         .stats {
-            color: var(--primary-green);
-            font-size: 1.2em;
-            font-weight: 600;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: var(--secondary);
         }
-        
-        footer {
-            background: var(--surface-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 0;
+
+        .about {
+            padding: 4rem 0;
+            background: var(--dark);
         }
-        
-        footer a {
-            color: var(--primary-purple);
-            text-decoration: none;
-            margin: 0 10px;
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
-        
-        /* Form Styles */
+
+        .contact {
+            padding: 4rem 0;
+        }
+
         form {
             max-width: 600px;
             margin: 0 auto;
             display: grid;
-            gap: 20px;
+            gap: 1.5rem;
         }
-        
+
+        .input-group {
+            position: relative;
+        }
+
         input, textarea {
             width: 100%;
-            padding: 12px;
-            background: var(--surface-color);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            background: var(--surface);
+            border: 1px solid var(--glass);
             border-radius: 8px;
-            color: var(--text-color);
+            color: var(--light);
             font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
         }
-        
+
         input:focus, textarea:focus {
             outline: none;
-            border-color: var(--primary-purple);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
-        
+
         textarea {
             min-height: 150px;
             resize: vertical;
         }
-        
+
+        footer {
+            padding: 4rem 0;
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
-            header {
-                position: static;
+            .nav-links {
+                display: none;
             }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-            
+
             .hero {
-                height: auto;
-                padding: 100px 0;
+                padding: 6rem 0;
             }
-            
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            
-            .game-grid, .team-grid {
+
+            .game-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <div class="noise"></div>
     <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#games">Games</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">TAPPY GAMES</a>
+                <ul class="nav-links">
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Welcome to <span class="highlight">Tappy Games</span></h1>
-                <p>Crafting addictive mobile experiences that bring joy to millions</p>
-                <a href="#games" class="cta-button">Explore Our Games</a>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Crafting Digital Magic Through Games</h1>
+                    <p>Experience immersive worlds and unforgettable adventures through our innovative mobile games.</p>
+                    <a href="#games" class="btn">Explore Our Games →</a>
+                </div>
             </div>
         </section>
 
         <section id="games" class="games">
             <div class="container">
-                <h2>Our <span class="highlight">Games</span></h2>
+                <div class="section-header">
+                    <h2>Featured Games</h2>
+                </div>
                 <div class="game-grid">
-                    <div class="game-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="Mystic AI game screenshot">
-                        <div class="game-card-content">
+                    <article class="game-card">
+                        <div class="game-image">
+                            <img src="/Marketing1.jpg?height=2796&width=1290" alt="Mystic AI">
+                        </div>
+                        <div class="game-content">
                             <h3>Mystic AI</h3>
-                            <p>Embark on an enchanting journey where AI-powered creatures evolve and adapt to your playstyle!</p>
-                            <p class="stats">Downloads: <span id="mystic-ai-downloads">1,000,000+</span></p>
+                            <p>Embark on an enchanting journey where AI-powered creatures evolve and adapt to your playstyle.</p>
                         </div>
-                    </div>
-                    <div class="game-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="Pixel Planes game screenshot">
-                        <div class="game-card-content">
+                    </article>
+                    
+                    <article class="game-card">
+                        <div class="game-image">
+                            <img src="/PixelPlanesDemo.jpg?height=2796&width=1290" alt="Pixel Planes">
+                        </div>
+                        <div class="game-content">
                             <h3>Pixel Planes</h3>
-                            <p>Soar through retro-styled skies in this thrilling aerial adventure game!</p>
-                            <p class="stats">Downloads: <span id="pixel-planes-downloads">500,000+</span></p>
+                            <p>Soar through retro-styled skies in this thrilling aerial adventure game.</p>
                         </div>
-                    </div>
-                    <div class="game-card">
-                        <img src="/placeholder.svg?height=200&width=300" alt="Fable Forge game screenshot">
-                        <div class="game-card-content">
+                    </article>
+                    
+                    <article class="game-card">
+                        <div class="game-image">
+                            <img src="/fableForge.jpg?height=2796&width=1290" alt="Fable Forge">
+                        </div>
+                        <div class="game-content">
                             <h3>Fable Forge</h3>
                             <p>Create and shape your own magical stories in this innovative narrative crafting game.</p>
-                            <p class="stats">Downloads: <span id="fable-forge-downloads">750,000+</span></p>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
         <section id="about" class="about">
             <div class="container">
-                <h2>About <span class="highlight">Tappy Games</span></h2>
-                <p>Founded in 2020, Tappy Games is a passionate team of developers, designers, and gamers dedicated to creating fun and engaging mobile experiences. Our mission is to bring joy and excitement to players around the world through innovative gameplay and charming designs.</p>
-                <p>With millions of downloads across our portfolio, we're committed to continually improving our games and developing new titles that captivate and entertain our growing community of players.</p>
+                <div class="about-content">
+                    <div class="section-header">
+                        <h2>Our Story</h2>
+                    </div>
+                    <p>Founded in 2020, we're a passionate team of developers and designers dedicated to creating exceptional mobile gaming experiences. Our mission is to push the boundaries of what's possible in mobile gaming, bringing joy and excitement to players worldwide.</p>
+                </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
             <div class="container">
-                <h2>Get in <span class="highlight">Touch</span></h2>
-                <p>Have questions or feedback? We'd love to hear from you!</p>
+                <div class="section-header">
+                    <h2>Get in Touch</h2>
+                </div>
                 <form id="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="cta-button">Send Message</button>
+                    <div class="input-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
                 </form>
             </div>
         </section>
@@ -301,30 +429,15 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 Tappy Games. All rights reserved.</p>
-            <p>Follow us on social media: 
-                <a href="#" target="_blank">Facebook</a> | 
-                <a href="#" target="_blank">Twitter</a> | 
+            <div class="social-links">
+                <a href="#" target="_blank">Twitter</a>
+                <a href="#" target="_blank">Discord</a>
                 <a href="#" target="_blank">Instagram</a>
-            </p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Simple animation for download counts
-        function animateDownloads(elementId, startCount) {
-            let count = startCount;
-            const element = document.getElementById(elementId);
-            setInterval(() => {
-                count += Math.floor(Math.random() * 100);
-                element.textContent = count.toLocaleString() + '+';
-            }, 5000);
-        }
-
-        animateDownloads('mystic-ai-downloads', 1000000);
-        animateDownloads('pixel-planes-downloads', 500000);
-        animateDownloads('fable-forge-downloads', 750000);
-
-        // Simple form submission handling
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Thank you for your message! We will get back to you soon.');

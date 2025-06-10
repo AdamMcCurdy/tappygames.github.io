@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Deletion - Tappy Games</title>
+    <title>Development Services - Tappy Games</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -74,35 +74,49 @@
             white-space: nowrap;
         }
 
-        .content-section {
+        .services-content {
             padding: 8rem 0 4rem;
         }
 
-        .content-section h1 {
+        .services-content h1 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
             color: var(--primary);
         }
 
-        .content-section h2 {
+        .services-content h2 {
             font-size: 1.5rem;
             margin: 2rem 0 1rem;
             color: var(--accent);
         }
 
-        .content-section p {
+        .services-content p {
             margin-bottom: 1rem;
         }
 
-        .content-section ul {
+        .services-content ul {
             margin-bottom: 1rem;
             padding-left: 2rem;
         }
 
-        .content-section li {
+        .services-content li {
             margin-bottom: 0.5rem;
         }
-        
+
+        .service-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass);
+        }
+
+        .service-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -149,7 +163,7 @@
         }
 
         @media (max-width: 768px) {
-            .content-section {
+            .services-content {
                 padding: 6rem 0 2rem;
             }
         }
@@ -166,33 +180,37 @@
     </header>
 
     <main>
-        <section class="content-section">
+        <section class="services-content">
             <div class="container">
-                <h1>Data Deletion Request</h1>
-                <p>At Tappy Games, we respect your privacy and your right to control your personal data. If you wish to request the deletion of your data associated with our games and services, please follow the instructions below.</p>
-
-                <h2>How to Request Data Deletion</h2>
-                <p>To request the deletion of your data, please send an email to our support team at:</p>
-                <p><a href="mailto:support@tappygames.com" style="color: var(--primary);">support@tappygames.com</a></p>
+                <h1>External Development Services</h1>
                 
-                <p>In your email, please include the following information to help us process your request efficiently:</p>
+                <div class="service-card">
+                    <h3>Bring Your Game Idea to Life</h3>
+                    <p>Have a concept for a mobile game? Our expert team can turn your vision into a reality, from initial prototype to a polished, market-ready product.</p>
+                    <a href="mailto:development@tappygames.com" class="btn">Inquire Now →</a>
+                </div>
+
+                <h2>Our Expertise</h2>
                 <ul>
-                    <li><strong>Game(s) Played:</strong> Specify which Tappy Games title(s) your request pertains to.</li>
-                    <li><strong>Account Identifier:</strong> If applicable, provide your in-game username, user ID, or the email address associated with your game account.</li>
-                    <li><strong>Reason for Deletion (Optional):</strong> While not required, providing a reason can help us improve our services.</li>
+                    <li><strong>Full-Cycle Game Development:</strong> Concept, design, development, QA, and launch.</li>
+                    <li><strong>Platform Specialization:</strong> Expertise in creating engaging experiences for iOS and Android.</li>
+                    <li><strong>Unity Engine Mastery:</strong> High-performance, scalable, and beautiful games built with Unity.</li>
+                    <li><strong>AI Integration:</strong> Leveraging cutting-edge AI to create dynamic and intelligent gameplay.</li>
+                    <li><strong>Backend & LiveOps:</strong> Robust backend systems for multiplayer, leaderboards, and live events.</li>
                 </ul>
 
-                <h2>What Happens Next</h2>
-                <p>Once we receive your request, we will:</p>
+                <h2>Why Partner With Us?</h2>
+                <p>We're not just developers; we're passionate gamers who understand what makes a game successful. We treat your project with the same care and dedication as our own titles.</p>
                 <ul>
-                    <li>Acknowledge receipt of your request within 72 hours.</li>
-                    <li>Verify your identity to ensure the security of your data. We may ask for additional information if necessary.</li>
-                    <li>Process your data deletion request in accordance with applicable laws and our internal policies. This typically takes up to 30 days.</li>
-                    <li>Confirm once your data has been deleted. Please note that some anonymized or aggregated data may be retained for analytical purposes, and some data may be kept if required by law.</li>
+                    <li><strong>Proven Track Record:</strong> A portfolio of successful, player-loved games.</li>
+                    <li><strong>Transparent Process:</strong> Regular updates and a collaborative approach to development.</li>
+                    <li><strong>Focus on Quality:</strong> We are committed to delivering a high-quality, bug-free experience.</li>
                 </ul>
 
-                <h2>Contact Us</h2>
-                <p>If you have any questions about the data deletion process or our privacy practices, please refer to our <a href="/privacy" style="color: var(--primary);">Privacy Policy</a> or contact us at <a href="mailto:privacy@tappygames.com" style="color: var(--primary);">privacy@tappygames.com</a>.</p>
+                <h2>Let's Build Something Great Together</h2>
+                <p>Ready to start the conversation? Reach out to us to discuss your project. We're excited to hear your ideas.</p>
+                <a href="mailto:development@tappygames.com?subject=Development%20Inquiry" class="btn">Contact Our Team →</a>
+
             </div>
         </section>
     </main>
@@ -205,7 +223,6 @@
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/support">Support</a>
                 <a href="/data">Data Deletion</a>
-                <a href="/services.html">Services</a>
             </div>
         </div>
     </footer>
